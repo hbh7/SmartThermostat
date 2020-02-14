@@ -1,0 +1,22 @@
+{
+  "name": "smartthermostat",
+  "version": "1.0.0",
+  "description": "SmartThermostat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hbh7/SmartThermostat.git"
+  },
+  "author": "hbh7",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hbh7/SmartThermostat/issues"
+  },
+  "homepage": "https://github.com/hbh7/SmartThermostat#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
