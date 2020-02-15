@@ -7,6 +7,7 @@ from luma.core.interface.serial import spi, noop
 from luma.core.virtual import viewport, sevensegment
 
 import sys
+import urllib2
 
 
 def main():
@@ -15,16 +16,22 @@ def main():
     device = max7219(serial, cascaded=1)
     seg = sevensegment(device)
 
+    text = ""
+    tries = 0
+
     while True:
-        f = open("text.txt","r")
-        contents = f.read()
-        #print(contents)
-        if "stop" in contents:
-            print("Python exiting")
-            sys.exit()
-        else:
-            seg.text = contents
-            time.sleep(0.5)
+        #f = open("text.txt","r")
+        #contents = f.read()
+
+        try: text = urllib2.urlopen('http://localhost:3000/api/segments').read()
+        except urllib2.URLError as e:
+            tries = tries + 1
+            if tries > 2:
+                print("Python exiting")
+                sys.exit()
+
+        seg.text = text
+        time.sleep(0.5)
 
 
 if __name__ == '__main__':

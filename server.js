@@ -49,19 +49,25 @@ app.get('/api/fan/off', function(req, res) {
 });
 
 app.get('/api/temperature', function(req, res) {
-	//res.status(200).send(temperature.getTemp().toString());
-
 	temperature.getTemp().then(function (temp) {
 		res.status(200).send(temp.toString());
 	});
 });
 
+app.get('/api/segments', function(req, res) {
+	res.status(200).send(display.getText());
+});
 
 
 const server = app.listen(port, () => console.log(`App listening on port ${port}!`));
 
-display.changeText("Running");
+setInterval(function() {
+	temperature.getTemp().then(function(temp) {
+		display.changeText(temp.toString());
+	});
+}, 5000);
 
+/*
 process.on('SIGINT', () => {
 	console.info('SIGINT signal received.');
 	server.close(() => {
@@ -69,4 +75,4 @@ process.on('SIGINT', () => {
 		display.stop();
 		console.log("Exiting");
 	});
-});
+});*/
