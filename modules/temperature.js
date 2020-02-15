@@ -1,4 +1,5 @@
 const sensor = require('ds18b20-raspi');
+// https://www.npmjs.com/package/ds18b20-raspi
 
 module.exports = {
 

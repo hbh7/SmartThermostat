@@ -4,8 +4,11 @@ const app = express();
 const port = 3000;
 
 // Custom Modules
-var thermostat = require("./thermostat");
-var temperature = require("./temperature");
+var thermostat = require("./modules/thermostat");
+var temperature = require("./modules/temperature");
+var display = require("./modules/display/display");
+
+display.start();
 
 app.get('/', function(req, res) {
 	res.sendFile(path.join(__dirname, 'www', 'index.html'));
@@ -53,4 +56,17 @@ app.get('/api/temperature', function(req, res) {
 	});
 });
 
-app.listen(port, () => console.log(`App listening on port ${port}!`));
+
+
+const server = app.listen(port, () => console.log(`App listening on port ${port}!`));
+
+display.changeText("Running");
+
+process.on('SIGINT', () => {
+	console.info('SIGINT signal received.');
+	server.close(() => {
+		console.log('Http server closed.');
+		display.stop();
+		console.log("Exiting");
+	});
+});
