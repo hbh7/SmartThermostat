@@ -1,18 +1,18 @@
+const path = require('path');
 const express = require('express');
 const app = express();
 const port = 3000;
 
-// GPIO Things
+// Custom Modules
 var thermostat = require("./thermostat");
+var temperature = require("./temperature");
 
 app.get('/', function(req, res) {
-	res.send('Welcome to the smart thermostat!');
-	//res.sendFile('www/' + req.params.file);
+	res.sendFile(path.join(__dirname, 'www', 'index.html'));
 });
 
-app.get('*.png', function(req, res) {
-	
-	res.sendFile('www/' + req.params.file);
+app.get('*.js', function(req, res) {
+	res.sendFile(path.join(__dirname, 'www', req.url));
 });
 
 app.get('/api/heat/on', function(req, res) {
@@ -43,6 +43,14 @@ app.get('/api/fan/on', function(req, res) {
 app.get('/api/fan/off', function(req, res) {
 	res.send('Stopping fan!');
 	thermostat.fanOff();
+});
+
+app.get('/api/temperature', function(req, res) {
+	//res.status(200).send(temperature.getTemp().toString());
+
+	temperature.getTemp().then(function (temp) {
+		res.status(200).send(temp.toString());
+	});
 });
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
