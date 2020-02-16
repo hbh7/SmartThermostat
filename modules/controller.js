@@ -39,12 +39,12 @@ function watchTemperature() {
 
         temp = parseFloat(temp);
 
-        console.log();
+        /*console.log();
         console.log("Current temp: " + temp);
         console.log("Target temp: " + targetTemp);
         console.log("Control Mode: " + controlMode);
         console.log("Climate Mode: " + climateMode);
-        console.log("Running: " + climateRunning);
+        console.log("Running: " + climateRunning);*/
 
         if(climateRunning) { // If heat or cool is running, check if it's time to shut off
             if(climateMode === climateModes.HEAT) {
@@ -147,6 +147,10 @@ module.exports = {
 
     },
 
+    getControlMode: function() {
+        return controlMode;
+    },
+
     setClimateMode: function(m) {
         if(controlMode !== controlModes.MANUAL) {
             return false;
@@ -170,6 +174,10 @@ module.exports = {
         }
     },
 
+    getClimateMode: function() {
+        return climateMode;
+    },
+
     setFanMode: function(m) {
         if(controlMode !== controlModes.MANUAL) {
             return false;
@@ -188,7 +196,11 @@ module.exports = {
         }
     },
 
-    setTemp: function(temp) {
+    getFanMode: function() {
+        return fanMode;
+    },
+
+    setTargetTemp: function(temp) {
         if(controlMode !== controlModes.MANUAL) {
             return false;
         } else {
@@ -196,6 +208,10 @@ module.exports = {
             watchTemperature();
             return true;
         }
-    }
+    },
+
+    getTargetTemp: function() {
+        return targetTemp;
+    },
 
 };

@@ -6,6 +6,39 @@
 </head>
 <body>
 
+    <h1> Smart Thermostat Controls </h1>
+
+    <p>Current Temperature: <span id="currentTemperature"></span></p>
+    <p>Target Temperature: <span id="targetTemperature"></span></p>
+
+    <h2> Adjust Temperature </h2>
+    <button onclick="setTemp('up')">Up</button> <br />
+    <button onclick="setTemp('down')">Down</button> <br />
+
+    <h2> System Mode </h2>
+    <button onclick="control('/api/setcontrolmode/manual')">Manual</button> <br />
+    <button onclick="control('/api/setcontrolmode/schedule')">Schedule</button> <br />
+    <br />
+    <p>Current Mode: <span id="currentControlMode"></span></p>
+    <br />
+
+    <h2> Climate Mode </h2>
+    <button onclick="control('/api/setclimatemode/heat')">Heat</button> <br />
+    <button onclick="control('/api/setclimatemode/cool')">Cool</button> <br />
+    <button onclick="control('/api/setclimatemode/off')">Off</button> <br />
+    <br />
+    <p>Current Mode: <span id="currentClimateMode"></span></p>
+    <br />
+
+    <h2> Fan Mode </h2>
+    <button onclick="control('/api/setfanmode/on')">On</button> <br />
+    <button onclick="control('/api/setfanmode/off')">Off</button> <br />
+    <br />
+    <p>Current Mode: <span id="currentFanMode"></span></p>
+    <br />
+
+    <h1> Debug switches </h1>
+
     <button onclick="control('/api/heat/on')">Heat on</button> <br /> <br />
     <button onclick="control('/api/heat/off')">Heat off</button> <br /> <br />
     <br /> <br />
@@ -15,6 +48,7 @@
     <button onclick="control('/api/fan/on')">Fan on</button> <br /> <br />
     <button onclick="control('/api/fan/off')">Fan off</button> <br /> <br />
 
-    <script src="controls.js"></script>
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/controls.js"></script>
 </body>
 </html>
