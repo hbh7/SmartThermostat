@@ -7,8 +7,10 @@ const port = 3000;
 var thermostat = require("./modules/thermostat");
 var temperature = require("./modules/temperature");
 var display = require("./modules/display/display");
+var controller = require("./modules/controller");
 
 display.start();
+controller.start();
 
 app.get('/', function(req, res) {
 	res.sendFile(path.join(__dirname, 'www', 'index.html'));
@@ -60,12 +62,6 @@ app.get('/api/segments', function(req, res) {
 
 
 const server = app.listen(port, () => console.log(`App listening on port ${port}!`));
-
-setInterval(function() {
-	temperature.getTemp().then(function(temp) {
-		display.changeText(temp.toString());
-	});
-}, 5000);
 
 /*
 process.on('SIGINT', () => {

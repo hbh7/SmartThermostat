@@ -14,6 +14,7 @@ var off = 0;
 module.exports = {
 
     heatOn: function() {
+        this.acOff();
         heatState = on;
         fanControl.writeSync(on);
         heatControl.writeSync(on);
@@ -28,6 +29,7 @@ module.exports = {
     },
 
     acOn: function() {
+        this.heatOff();
         acState = on;
         fanControl.writeSync(on);
         acControl.writeSync(on);
