@@ -20,27 +20,59 @@ app.get('*.js', function(req, res) {
 	res.sendFile(path.join(__dirname, 'www', req.url));
 });
 
-app.get('/api/setmode/:mode', function(req, res) {
-	if(req.param.mode !== "heat" || req.param.mode !== "cool" || req.param.mode !== "fan" || req.param.mode !== "off") {
+app.get('/api/setcontrolmode/:mode', function(req, res) {
+	if(req.params.mode !== "manual" && req.params.mode !== "schedule") {
 		res.status(400).send('Invalid mode');
 
-	} else if(controller.setMode(req.param.mode)) {
-		res.send(req.param.mode + " mode active");
+	} else {
+		controller.setControlMode(req.params.mode);
+		res.send(req.params.mode + " mode active");
+	}
+});
+
+app.get('/api/setclimatemode/:mode', function(req, res) {
+	if(req.params.mode !== "heat" && req.params.mode !== "cool" && req.params.mode !== "off") {
+		res.status(400).send('Invalid mode');
 
 	} else {
-		res.status(403).send('Manual mode not active');
+		if(controller.setClimateMode(req.params.mode)) {
+			if(req.params.mode === "off") {
+				res.send("No mode active");
+			} else {
+				res.send(req.params.mode + " mode active");
+			}
+
+		} else {
+			res.status(403).send('Manual mode not active');
+		}
+	}
+});
+
+app.get('/api/setfanmode/:mode', function(req, res) {
+	if(req.params.mode !== "on" && req.params.mode !== "off") {
+		res.status(400).send('Invalid mode');
+
+	} else {
+		if(controller.setFanMode(req.params.mode)) {
+			res.send("Fan set to req.params.mode");
+
+		} else {
+			res.status(403).send('Manual mode not active');
+		}
 	}
 });
 
 app.get('/api/settemp/:temp', function(req, res) {
-	if(!Number.isInteger(req.param.temp)) {
+	if(!Number.isInteger(parseInt(req.params.temp))) {
 		res.status(400).send('Invalid temp');
 
-	} else if(controller.setTemp(req.param.temp)) {
-		res.send("Temperature Set");
-
 	} else {
-		res.status(403).send('Manual mode not active');
+		if(controller.setTemp(req.params.temp)) {
+			res.send("Temperature Set");
+
+		} else {
+			res.status(403).send('Manual mode not active');
+		}
 	}
 });
 
