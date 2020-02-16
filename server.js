@@ -20,6 +20,30 @@ app.get('*.js', function(req, res) {
 	res.sendFile(path.join(__dirname, 'www', req.url));
 });
 
+app.get('/api/setmode/:mode', function(req, res) {
+	if(req.param.mode !== "heat" || req.param.mode !== "cool" || req.param.mode !== "fan" || req.param.mode !== "off") {
+		res.status(400).send('Invalid mode');
+
+	} else if(controller.setMode(req.param.mode)) {
+		res.send(req.param.mode + " mode active");
+
+	} else {
+		res.status(403).send('Manual mode not active');
+	}
+});
+
+app.get('/api/settemp/:temp', function(req, res) {
+	if(!Number.isInteger(req.param.temp)) {
+		res.status(400).send('Invalid temp');
+
+	} else if(controller.setTemp(req.param.temp)) {
+		res.send("Temperature Set");
+
+	} else {
+		res.status(403).send('Manual mode not active');
+	}
+});
+
 app.get('/api/heat/on', function(req, res) {
 	res.send('Starting heat!');
 	thermostat.heatOn();
