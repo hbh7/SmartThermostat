@@ -1,119 +1,154 @@
-*{ 
-    background-color: #4c3863; 
-    padding:10px; 
-    border-radius:15px; 
-    margin-bottom: 15px; 
-} 
- 
-body{ 
-    color:#555555; 
-    font: normal 16px Arial, Helvetica, sans-serif; 
- 
-    line-height: 1.6em; 
-    margin:0; 
- 
-} 
- 
- 
-p { 
-    font-size: 18px; 
-    background-color: ghostwhite; 
-    color: #282c34 
-} 
- 
-a{ 
-    text-decoration: none; 
-    font-style: italic; 
-    color: #000; 
-} 
- 
-a:hover{ 
-    color:red; 
-} 
- 
-a:active{ 
-    color: crimson; 
-} 
- 
-.container{ 
-    background-color: ghostwhite; 
-    border:1px #ccc solid; 
-    padding: 0px 20px; 
-    width:80%; 
-    margin: auto; 
-} 
- 
-button, .button{ 
-    background-color:#333; 
-    color:#fff; 
-    font-size: 15px; 
-    border:none; 
-    padding: 2px 5px; 
-    border-radius:5px; 
-} 
- 
-.button{ 
-    padding: 8px; 
-    width: 95%; 
-    border-radius: 10px; 
-} 
- 
-button:hover, .button:hover{ 
-    background-color:yellowgreen; 
-    color:#fff; 
-} 
- 
-.hot:hover{ 
-    background-color:red; 
-    color:#fff; 
-} 
- 
-.cold:hover{ 
-    background-color:blue; 
-    color:#fff; 
-} 
- 
- 
- 
-button:active, .button:active{ 
-    background-color: crimson; 
-} 
- 
-h2 { 
-    background-color: lavender; 
-    color: #282c34; 
-    text-align:center; 
-} 
- 
-h1{ 
-    background-color: #282c34; 
-    color: ghostwhite; 
-    text-align: center; 
-} 
- 
-.my-form .form-group{ 
-    padding-bottom: 15px; 
-} 
- 
-.categories label{ 
-    display:block; 
-} 
- 
-.categories input{ 
-    padding: 8px; 
-    width:95%; 
-    border-radius: 9px; 
-} 
- 
-.table1 th, .table1 td{ 
-    padding-right: 40px; 
-} 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+*{
+    background-color: #4c3863;
+    padding:10px;
+    border-radius:15px;
+    margin-bottom: 15px;
+}
+
+body{
+    color:#555555;
+    font: normal 16px Arial, Helvetica, sans-serif;
+
+    line-height: 1.6em;
+    margin:0;
+
+}
+
+span{
+    background-color: ghostwhite;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 50px;
+    display: block;
+}
+
+p {
+    font-size: 18px;
+    background-color: ghostwhite;
+    color: #282c34
+}
+
+a{
+    text-decoration: none;
+    font-style: italic;
+    color: #000;
+}
+
+a:hover{
+    color:red;
+}
+
+a:active{
+    color: crimson;
+}
+
+.clr{
+    clear:both;
+    background-color: ghostwhite;
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    background-color: ghostwhite;
+    border:1px #ccc solid;
+    padding: 0px 20px;
+    width:80%;
+    margin: auto;
+}
+
+button, .button{
+    background-color:#333;
+    color:#fff;
+    font-size: 18px;
+    border:none;
+    padding: 2px 5px;
+    border-radius:5px;
+}
+
+.button{
+    padding: 8px;
+    width: 95%;
+    border-radius: 10px;
+}
+
+button:hover, .button:hover{
+    background-color:darkgreen;
+    color:#fff;
+}
+
+.hot:hover{
+    background-color: brown;
+    color:#fff;
+    block: block;
+}
+
+.cold:hover{
+    background-color: darkblue;
+    color:#fff;
+}
+
+button:active, .button:active, .cold:active, .hot:active{
+    background-color: darkslateblue;
+    display: inline-block;
+}
+
+h3 {
+    padding: 5px;
+    margin: 5px;
+    background-color: ghostwhite;
+    color: #282c34;
+    text-align:center;
+}
+
+h2 {
+    background-color: lavender;
+    color: #282c34;
+    text-align:center;
+}
+
+h1{
+    background-color: #282c34;
+    color: ghostwhite;
+    text-align: center;
+}
+
+.my-form .form-group{
+    padding-bottom: 15px;
+}
+
+.categories label{
+    display:block;
+}
+
+.categories input{
+    padding: 8px;
+    width:95%;
+    border-radius: 9px;
+}
+
+.table1 th, .table1 td{
+    padding-right: 40px;
+}
+
+.block3{
+    background-color: ghostwhite;
+    float:left;
+    width:33.3%;
+    padding:10px;
+    box-sizing:border-box;
+}
+
+.sys{
+    font-size: 15px;
+    padding: 0px;
+    margin: 0;
+}
+
+
+
+
+
+
+
+
