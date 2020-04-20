@@ -62,8 +62,9 @@ button, .button{
     color:#fff;
     font-size: 18px;
     border:none;
-    padding: 2px 5px;
+    padding: 10px 10px;
     border-radius:5px;
+    width:100%;
 }
 
 .button{
@@ -72,7 +73,12 @@ button, .button{
     border-radius: 10px;
 }
 
-button:hover, .button:hover{
+.day{
+    padding: 8px;
+    width: 13.5%;
+    border-radius: 10px;
+}
+button:hover, .button:hover, .day:hover{
     background-color:darkgreen;
     color:#fff;
 }
@@ -111,6 +117,7 @@ h1{
     background-color: #282c34;
     color: ghostwhite;
     text-align: center;
+
 }
 
 .my-form .form-group{
@@ -131,21 +138,49 @@ h1{
     padding-right: 40px;
 }
 
-.block3{
+.block3, .block2, .block4{
     background-color: ghostwhite;
     float:left;
     width:33.3%;
     padding:10px;
+    padding-bottom:0px;
     box-sizing:border-box;
+}
+.block2{
+    width:50%;
+}
+
+.block4{
+    width:25%;
 }
 
 .sys{
-    font-size: 15px;
+    font-size: 18px;
     padding: 0px;
     margin: 0;
 }
 
+.my-form{
+    padding:20px;
+    background-color: ghostwhite;
+}
 
+.my-form .form-group{
+    padding-bottom: 15px;
+    background-color: ghostwhite;
+}
+
+.my-form label{
+    font-size: 20px;
+    background-color: ghostwhite;
+    display:block;
+}
+
+.my-form input[type="text"], .my-form textarea{
+    background-color: ghostwhite;
+    padding: 8px;
+    width:100%;
+}
 
 
 
