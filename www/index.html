@@ -10,9 +10,24 @@
 
     <div class="container">
         <h1> Smart Thermostat Controls </h1>
+        <h2> Current Settings </h2>
+        <div class="block3">
+            <h3>Current Temperature</h3>
+            <span id="currentTemperature"> 73 </span>
+        </div>
 
-        <p>Current Temperature: <span id="currentTemperature"></span></p>
-        <p>Target Temperature: <span id="targetTemperature"></span></p>
+        <div class="block3">
+            <h3>Target Temperature</h3>
+            <span id="targetTemperature"> 73 </span>
+        </div>
+
+        <div class="block3">
+            <h3>System Mode</h3>
+            <span class="sys" id="climate"> Heat </span>
+            <span class="sys" id="system"> Manual </span>
+            <span class="sys" id="fan"> Off </span>
+        </div>
+        <div class="clr"></div>
 
         <h2> Adjust Temperature </h2>
         <button class="hot" onclick="setTemp('up')">Up</button> <br />
