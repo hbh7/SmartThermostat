@@ -24,11 +24,12 @@ var fanMode = fanModes.OFF; // save/load this from a file later
 
 var targetTemp = -1;
 var climateRunning = 0;
-var overshootRange = 2;
+var overshootRange = 1;
 
 const displayCycles = {
     CURRENT: "current",
-    SET: "set"
+    SET: "set",
+    FAN: "fan"
 };
 
 let displayCycle = displayCycles.CURRENT;
@@ -48,18 +49,16 @@ function watchTemperature() {
 
         if(climateRunning) { // If heat or cool is running, check if it's time to shut off
             if(climateMode === climateModes.HEAT) {
-                console.log(targetTemp + overshootRange);
-                console.log(temp > targetTemp + overshootRange);
                 if(temp > targetTemp + overshootRange) {
                     // Shut off heat
-                    console.log("Heat off");
+                    console.log("Turning heat off");
                     thermostat.heatOff();
                     climateRunning = 0;
                 }
             } else if(climateMode === climateModes.COOL) {
                 if(temp < targetTemp - overshootRange) {
                     // Shut off AC
-                    console.log("AC off");
+                    console.log("Turning AC off");
                     thermostat.acOff();
                     climateRunning = 0;
                 }
@@ -69,14 +68,14 @@ function watchTemperature() {
             if(climateMode === climateModes.HEAT) {
                 if(temp < targetTemp - overshootRange) {
                     // Turn on heat
-                    console.log("Heat on");
+                    console.log("Turning heat on");
                     thermostat.heatOn();
                     climateRunning = 1;
                 }
             } else if(climateMode === climateModes.COOL) {
                 if(temp > targetTemp + overshootRange) {
                     // Turn off AC
-                    console.log("AC on");
+                    console.log("Turning AC on");
                     thermostat.acOn();
                     climateRunning = 1;
                 }
@@ -92,7 +91,7 @@ module.exports = {
 
     start: function () {
 
-        setInterval(this.updateDisplay, 5000);
+        setInterval(this.updateDisplay, 3000);
         setInterval(watchTemperature, 3000); // add another 0 later
 
     },
@@ -104,7 +103,7 @@ module.exports = {
 
             switch(displayCycle) {
                 case displayCycles.CURRENT:
-                    str = "CUr.  ";
+                    str = "CUrr. ";
                     str += temp;
                     displayCycle = displayCycles.SET;
                     break;
@@ -112,21 +111,32 @@ module.exports = {
                 case displayCycles.SET:
                     switch(climateMode) {
                         case climateModes.HEAT:
-                            str += "SEt. H. ";
+                            str += "HEAT.  ";
                             str += targetTemp;
                             break;
                         case climateModes.COOL:
-                            str += "SEt. C. ";
+                            str += "Cool.  ";
                             str += targetTemp;
-                            break;
-                        case climateModes.FAN:
-                            str += "FAn On";
                             break;
                         case climateModes.OFF:
                             str += "Sys. OFF";
                             break;
                     }
+                    displayCycle = displayCycles.FAN;
+                    break;
+
+                case displayCycles.FAN:
+                    str = "FAN ";
+                    switch(fanMode) {
+                        case fanModes.ON:
+                            str += "  ON";
+                            break;
+                        case fanModes.OFF:
+                            str += " Off";
+                            break;
+                    }
                     displayCycle = displayCycles.CURRENT;
+                    break;
             }
 
             display.changeText(str.toString());

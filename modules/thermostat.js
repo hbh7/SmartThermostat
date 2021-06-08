@@ -16,30 +16,30 @@ module.exports = {
     heatOn: function() {
         this.acOff();
         heatState = on;
-        fanControl.writeSync(on);
+        //fanControl.writeSync(on);
         heatControl.writeSync(on);
     },
 
     heatOff: function() {
         heatState = off;
-        if(fanState !== on) {
-            fanControl.writeSync(off);
-        }
+        //if(fanState !== on) {
+        //    fanControl.writeSync(off);
+        //}
         heatControl.writeSync(off);
     },
 
     acOn: function() {
         this.heatOff();
         acState = on;
-        fanControl.writeSync(on);
+        //fanControl.writeSync(on);
         acControl.writeSync(on);
     },
 
     acOff: function() {
         acState = off;
-        if(fanState !== on) {
-            fanControl.writeSync(off);
-        }
+        //if(fanState !== on) {
+        //    fanControl.writeSync(off);
+        //}
         acControl.writeSync(off);
     },
 
@@ -50,9 +50,10 @@ module.exports = {
 
     fanOff: function() {
         fanState = off;
-        if(heatState !== on && acState !== on) {
-            fanControl.writeSync(off);
-        }
+        fanControl.writeSync(off);
+        //if(heatState !== on && acState !== on) {
+        //    fanControl.writeSync(off);
+        //}
     },
 
 };

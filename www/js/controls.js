@@ -13,7 +13,7 @@ function setTemp(direction) {
 	} else if(direction === "down") {
 		url += (Number.parseInt($("#targetTemperature").text()) - 1);
 	} else {
-		return;
+		url += (Number.parseInt($("#setTempNumber").val()));
 	}
 	req.open('GET', url, true);
 	req.send();
@@ -42,5 +42,5 @@ function updateStatus() {
 	});
 }
 
-//setInterval(updateStatus, 5000);
+setInterval(updateStatus, 3000);
 updateStatus();
