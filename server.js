@@ -6,10 +6,9 @@ const port = 3000;
 // Custom Modules
 var thermostat = require("./modules/thermostat");
 var temperature = require("./modules/temperature");
-var display = require("./modules/display/display");
 var controller = require("./modules/controller");
 
-display.start();
+temperature.start();
 controller.start();
 
 app.get('/', function(req, res) {
@@ -128,10 +127,6 @@ app.get('/api/fan/off', function(req, res) {
 	thermostat.fanOff();
 });
 
-app.get('/api/segments', function(req, res) {
-	res.status(200).send(display.getText());
-});
-
 
 const server = app.listen(port, () => console.log(`App listening on port ${port}!`));
 
@@ -140,7 +135,6 @@ process.on('SIGINT', () => {
 	console.info('SIGINT signal received.');
 	server.close(() => {
 		console.log('Http server closed.');
-		display.stop();
 		console.log("Exiting");
 	});
 });*/
