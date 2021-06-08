@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/hbh7/SmartThermostat#readme",
   "dependencies": {
-    "ds18b20-raspi": "^0.3.4",
+    "ds18b20-raspi": "^0.3.6",
     "express": "^4.17.1"
   }
 }
