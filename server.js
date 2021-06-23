@@ -8,7 +8,7 @@ var thermostat = require("./modules/thermostat");
 var temperature = require("./modules/temperature");
 var controller = require("./modules/controller");
 
-temperature.start();
+//temperature.start();
 controller.start();
 
 app.get('/', function(req, res) {
@@ -22,7 +22,6 @@ app.get('*.js', function(req, res) {
 app.get('/api/setcontrolmode/:mode', function(req, res) {
 	if(req.params.mode !== "manual" && req.params.mode !== "schedule") {
 		res.status(400).send('Invalid mode');
-
 	} else {
 		controller.setControlMode(req.params.mode);
 		res.status(200).send(req.params.mode + " mode active");
@@ -36,7 +35,6 @@ app.get('/api/getcontrolmode', function(req, res) {
 app.get('/api/setclimatemode/:mode', function(req, res) {
 	if(req.params.mode !== "heat" && req.params.mode !== "cool" && req.params.mode !== "off") {
 		res.status(400).send('Invalid mode');
-
 	} else {
 		if(controller.setClimateMode(req.params.mode)) {
 			if(req.params.mode === "off") {
@@ -44,7 +42,6 @@ app.get('/api/setclimatemode/:mode', function(req, res) {
 			} else {
 				res.status(200).send(req.params.mode + " mode active");
 			}
-
 		} else {
 			res.status(403).send('Manual mode not active');
 		}

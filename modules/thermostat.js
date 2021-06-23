@@ -9,6 +9,9 @@ function moduleAvailable(name) {
 
 // Enable device types as applicable
 const TuyAPI = moduleAvailable('tuyapi') ? require('tuyapi') : null;
+const kasa = moduleAvailable('tplink-smarthome-api') ? require('tplink-smarthome-api') : null;
+const kasaClient = kasa ? new kasa() : null;
+const Gpio = moduleAvailable('onoff') ? require('onoff').Gpio : null;
 
 // Define some types to describe different HVAC devices
 const controllableDeviceTypes = Object.freeze({
@@ -20,6 +23,7 @@ const controllableDeviceTypes = Object.freeze({
 // Define some control APIs to describe different ways of controlling HVAC devices
 const controllableDeviceAPIs = Object.freeze({
    TUYA: Symbol("tuya"),
+   KASA: Symbol("kasa"),
    RELAY: Symbol("relay"),
    WEBHOOK: Symbol("webhook")
 });
@@ -34,10 +38,26 @@ class controllableDevice {
       // Configure access to the device
       switch(api) {
          case controllableDeviceAPIs.TUYA:
-
+            // TODO: Make functional
+            this.device = new TuyAPI({ id: this.location.id, ip: this.location.ip, key: this.location.key });
+            // Find device on network
+            this.device.find().then(() => {
+               // Connect to device
+               this.device.connect();
+            });
+            break;
+         case controllableDeviceAPIs.KASA:
+            // TODO: Make functional
+            this.device = kasaClient.getDevice({ host: this.location.ip });
+            break;
          case controllableDeviceAPIs.RELAY:
-
+            // TODO: Make functional
+            this.device = new Gpio(location, 'high', {activeLow: true});
+            break;
          case controllableDeviceAPIs.WEBHOOK:
+            // TODO: Make functional
+            this.device = null
+            break;
       }
 
       // Collect the current state (on/off)
@@ -46,19 +66,22 @@ class controllableDevice {
    }
 
    async turnOn() {
-
-      switch(api) {
+      switch(this.api) {
          case controllableDeviceAPIs.TUYA:
             // TODO: Make functional
-            this.device = tinytuya.BulbDevice('xxxxxxxxxxx', '10.20.x.x', 'xxxxxxx');
+            await this.device.set({dps: 1, set: true});
+            break;
+         case controllableDeviceAPIs.KASA:
+            // TODO: Make functional
+            await this.device.setPowerState(true);
             break;
          case controllableDeviceAPIs.RELAY:
             // TODO: Make functional
-            this.device = new Gpio(17, 'high', {activeLow: true});
+
             break;
          case controllableDeviceAPIs.WEBHOOK:
             // TODO: Make functional
-            this.device = null
+
             break;
       }
 
@@ -67,7 +90,24 @@ class controllableDevice {
    }
 
    async turnOff() {
+      switch(this.api) {
+         case controllableDeviceAPIs.TUYA:
+            // TODO: Make functional
+            await this.device.set({dps: 1, set: false});
+            break;
+         case controllableDeviceAPIs.KASA:
+            // TODO: Make functional
+            await this.device.setPowerState(false);
+            break;
+         case controllableDeviceAPIs.RELAY:
+            // TODO: Make functional
 
+            break;
+         case controllableDeviceAPIs.WEBHOOK:
+            // TODO: Make functional
+
+            break;
+      }
       this.state = "off";
       return true;
    }
@@ -77,7 +117,7 @@ class controllableDevice {
    }
 
    async refreshState () {
-      this.state = "unknown"
+      this.state = "unknown";
 
       return this.state;
    }
@@ -93,6 +133,18 @@ const controllableDevices = {
 
 // Proposed functionality for validating types, this should get moved to the code creating objects of this class
 //console.assert(TuyAPI != null)
+
+setTimeout(function() {
+   console.log("Attempting to turn off AC");
+   controllableDevices.hunters_ac.turnOff();
+}, 5000);
+
+setTimeout(function() {
+   console.log("Attempting to turn on AC");
+   controllableDevices.hunters_ac.turnOn();
+}, 10000);
+
+
 
 var heatState = 0;
 var acState = 0;

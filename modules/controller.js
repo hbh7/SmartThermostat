@@ -1,6 +1,5 @@
 var thermostat = require("../modules/thermostat");
 var temperature = require("../modules/temperature");
-var display = require("../modules/display/display");
 
 const controlModes = {
     MANUAL: 'manual',
@@ -26,13 +25,6 @@ var targetTemp = -1;
 var climateRunning = 0;
 var overshootRange = 1;
 
-const displayCycles = {
-    CURRENT: "current",
-    SET: "set",
-    FAN: "fan"
-};
-
-let displayCycle = displayCycles.CURRENT;
 
 
 function watchTemperature() {
@@ -90,57 +82,7 @@ function watchTemperature() {
 module.exports = {
 
     start: function () {
-
-        setInterval(this.updateDisplay, 3000);
         setInterval(watchTemperature, 3000); // add another 0 later
-
-    },
-
-    updateDisplay: function() {
-        temperature.getTemp().then(function(temp) {
-
-            let str = "";
-
-            switch(displayCycle) {
-                case displayCycles.CURRENT:
-                    str = "CUrr. ";
-                    str += temp;
-                    displayCycle = displayCycles.SET;
-                    break;
-
-                case displayCycles.SET:
-                    switch(climateMode) {
-                        case climateModes.HEAT:
-                            str += "HEAT.  ";
-                            str += targetTemp;
-                            break;
-                        case climateModes.COOL:
-                            str += "Cool.  ";
-                            str += targetTemp;
-                            break;
-                        case climateModes.OFF:
-                            str += "Sys. OFF";
-                            break;
-                    }
-                    displayCycle = displayCycles.FAN;
-                    break;
-
-                case displayCycles.FAN:
-                    str = "FAN ";
-                    switch(fanMode) {
-                        case fanModes.ON:
-                            str += "  ON";
-                            break;
-                        case fanModes.OFF:
-                            str += " Off";
-                            break;
-                    }
-                    displayCycle = displayCycles.CURRENT;
-                    break;
-            }
-
-            display.changeText(str.toString());
-        });
     },
 
     setControlMode: function(m) {

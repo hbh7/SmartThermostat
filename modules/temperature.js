@@ -1,11 +1,12 @@
 const sensor = require('ds18b20-raspi');
 // https://www.npmjs.com/package/ds18b20-raspi
+// Automatically locates the sensor (somehow)
 
 let t = -1;
 
 module.exports = {
 
-    start: async function() {
+    start: function() {
         setInterval(this.updateTemp, 5000);
     },
 
