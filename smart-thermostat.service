@@ -1,0 +1,12 @@
+[Unit]
+Description=Smart thermostat server
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+WorkingDirectory=/home/pi/SmartThermostat/thermostat
+ExecStart=/usr/bin/npm start
+
+[Install]
+WantedBy=multi-user.target
