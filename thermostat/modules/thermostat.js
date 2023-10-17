@@ -9,7 +9,8 @@ function moduleAvailable(name) {
 
 // Enable device types as applicable
 const TuyAPI = moduleAvailable('tuyapi') ? require('tuyapi') : null;
-const kasa = moduleAvailable('tplink-smarthome-api') ? require('tplink-smarthome-api') : null;
+//const kasa = moduleAvailable('tplink-smarthome-api') ? require('tplink-smarthome-api') : null;
+const kasa = null;
 const kasaClient = kasa ? new kasa() : null;
 const Gpio = moduleAvailable('onoff') ? require('onoff').Gpio : null;
 
@@ -48,7 +49,7 @@ class controllableDevice {
             break;
          case controllableDeviceAPIs.KASA:
             // TODO: Make functional
-            this.device = kasaClient.getDevice({ host: this.location.ip });
+            //this.device = kasaClient.getDevice({ host: this.location.ip });
             break;
          case controllableDeviceAPIs.RELAY:
             // TODO: Make functional
