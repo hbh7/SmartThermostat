@@ -126,9 +126,11 @@ class controllableDevice {
 // Define our devices. This should probably become a config thing at some point
 const controllableDevices = {
    "heat" : new controllableDevice(controllableDeviceTypes.HEAT, controllableDeviceAPIs.WEBHOOK, ["http://10.20.x.x:xxxx/on", "http://10.20.x.x:xxxx/off", "http://10.20.x.x:xxxx/status"]),
-   "hunters_ac" : new controllableDevice(controllableDeviceTypes.AC, controllableDeviceAPIs.TUYA, ['xxxxxxxxxxx', '10.20.x.x', 'xxxxxxx']),
-   "moms_ac" : new controllableDevice(controllableDeviceTypes.AC, controllableDeviceAPIs.TUYA, ['xxxxxxxxxxx', '10.20.x.x', 'xxxxxxx']),
-   "office_ac" : new controllableDevice(controllableDeviceTypes.AC, controllableDeviceAPIs.TUYA, ['xxxxxxxxxxx', '10.20.x.x', 'xxxxxxx'])
+   "hunters_ac" : new controllableDevice(controllableDeviceTypes.AC, controllableDeviceAPIs.KASA, { ip: '10.20.11.173' }) /*,
+   "hunters_ac" : new controllableDevice(controllableDeviceTypes.AC, controllableDeviceAPIs.TUYA, { id: 'eba94c934762af2e13sqrb', ip: '10.20.11.173', key: '3b9ece5a319075a1' })
+   "hunters_ac" : new controllableDevice(controllableDeviceTypes.AC, controllableDeviceAPIs.TUYA, { id: 'eba94c934762af2e13sqrb', ip: '10.20.x.x', key: '3b9ece5a319075a1' }),
+   "moms_ac" : new controllableDevice(controllableDeviceTypes.AC, controllableDeviceAPIs.TUYA, { id: 'xxxxxxxxxxx', ip: '10.20.x.x', key: '3b9ece5a319075a1' }),
+   "office_ac" : new controllableDevice(controllableDeviceTypes.AC, controllableDeviceAPIs.TUYA, { id: 'xxxxxxxxxxx', ip: '10.20.x.x', key: '3b9ece5a319075a1' })*/
 }
 
 // Proposed functionality for validating types, this should get moved to the code creating objects of this class
