@@ -18,7 +18,7 @@
   "homepage": "https://github.com/hbh7/SmartThermostat#readme",
   "dependencies": {
     "ds18b20-raspi": "^0.3.6",
-    "express": "^4.18.2",
+    "express": "^4.19.2",
     "rpi-backlight": "^0.4.0",
     "tplink-smarthome-api": "^4.2.0",
     "tuyapi": "^7.5.2"
